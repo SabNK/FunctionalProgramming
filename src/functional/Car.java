@@ -56,12 +56,9 @@ public class Car {
 		return RED_CAR_CRITERION;
 	}
 
-	public static final CarCriterion RED_CAR_CRITERION = new CarCriterion () {
-		@Override
-		public boolean test(Car c) {
+	public static final CarCriterion RED_CAR_CRITERION = (c) -> {
 			return c.color.equals("Red");
-		}
-	};
+		};
 	
 	public static CarCriterion getGasLevelCarCriterion (int threshold) {
 		return new GasLevelCarCriterion (threshold);
