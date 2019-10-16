@@ -38,5 +38,15 @@ public class CarScratch {
 		
 		showAll(cars);
 		showAll(getColoredCars(cars, "Black"));		
-	}	
+	}
+	
+	interface CarCriterion {
+		boolean test (Car c);
+	}
+	class RedCarCriterion implements CarCriterion {
+		@Override
+		public boolean test(Car c) {
+			return c.getColor().equals("Red");
+		}
+	}
 }
