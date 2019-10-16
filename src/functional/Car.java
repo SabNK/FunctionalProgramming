@@ -52,20 +52,22 @@ public class Car {
 				+ trunkContents: " no trunck") + "]";
 	}
 		
-	public static RedCarCriterion getRedCarCriterion() {
+	public static CarCriterion getRedCarCriterion() {
 		return RED_CAR_CRITERION;
 	}
 
-	public static final RedCarCriterion RED_CAR_CRITERION = new RedCarCriterion ();
-	
-	static class RedCarCriterion implements CarCriterion {
+	public static final CarCriterion RED_CAR_CRITERION = new CarCriterion () {
 		@Override
 		public boolean test(Car c) {
 			return c.color.equals("Red");
 		}
+	};
+	
+	public static CarCriterion getGasLevelCarCriterion (int threshold) {
+		return new GasLevelCarCriterion (threshold);
 	}
 	
-	static class GasLevelCarCriterion implements CarCriterion {
+	private static class GasLevelCarCriterion implements CarCriterion {
 		int gasLevelThreshold;
 		
 		public GasLevelCarCriterion(int gasLevel) {
