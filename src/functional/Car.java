@@ -51,7 +51,12 @@ public class Car {
 		return "Car [gasLevel=" + gasLevel + ", color=" + color + ", passengers=" + passengers + (trunkContents != null ?", trunkContents="
 				+ trunkContents: " no trunck") + "]";
 	}
-	
+		
+	public static RedCarCriterion getRedCarCriterion() {
+		return RED_CAR_CRITERION;
+	}
+
+	public static final RedCarCriterion RED_CAR_CRITERION = new RedCarCriterion ();
 	
 	static class RedCarCriterion implements CarCriterion {
 		@Override
