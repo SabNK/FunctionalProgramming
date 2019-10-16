@@ -32,6 +32,9 @@ public class CarScratch {
 		showAll(cars);
 		showAll(getCarsByCriterion(cars, Car.getRedCarCriterion()));
 		showAll(getCarsByCriterion(cars, Car.getGasLevelCarCriterion(7)));
+		
+		cars.sort(Car.getGasComparator());
+		showAll(cars);
 	}
 }
 
