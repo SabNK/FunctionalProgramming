@@ -83,10 +83,7 @@ public class Car {
 		return GAS_COMPARATOR;
 	}
 
-	private static final Comparator<Car> GAS_COMPARATOR = new Comparator <Car>() {
-		@Override
-		public int compare(Car arg0, Car arg1) {			
+	private static final Comparator<Car> GAS_COMPARATOR = (Car arg0, Car arg1) -> {			
 			return arg0.gasLevel - arg1.gasLevel;
-		}		
 	};
 }
