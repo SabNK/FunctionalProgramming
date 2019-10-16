@@ -53,7 +53,24 @@ public class Car {
 	}
 	
 	
+	static class RedCarCriterion implements CarCriterion {
+		@Override
+		public boolean test(Car c) {
+			return c.color.equals("Red");
+		}
+	}
 	
-	
-	
+	static class GasLevelCarCriterion implements CarCriterion {
+		int gasLevelThreshold;
+		
+		public GasLevelCarCriterion(int gasLevel) {
+			super();
+			this.gasLevelThreshold = gasLevel;
+		}
+
+		@Override
+		public boolean test(Car c) {
+			return c.gasLevel >= gasLevelThreshold;
+		}
+	}
 }
