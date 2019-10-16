@@ -30,7 +30,8 @@ public class CarScratch {
 				);
 		
 		showAll(cars);
-		showAll(getCarsByCriterion(cars, new RedCarCriterion()));		
+		showAll(getCarsByCriterion(cars, new RedCarCriterion()));
+		showAll(getCarsByCriterion(cars, new GasLevelCarCriterion(6)));
 	}
 }
 
@@ -42,4 +43,18 @@ class RedCarCriterion implements CarCriterion {
 	public boolean test(Car c) {
 		return c.getColor().equals("Red");
 	}
+}
+class GasLevelCarCriterion implements CarCriterion {
+	int gasLevelThreshold;
+	
+	public GasLevelCarCriterion(int gasLevel) {
+		super();
+		this.gasLevelThreshold = gasLevel;
+	}
+
+	@Override
+	public boolean test(Car c) {
+		return c.getGasLevel()>= gasLevelThreshold;
+	}
+	
 }
