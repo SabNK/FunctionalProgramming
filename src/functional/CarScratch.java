@@ -34,18 +34,21 @@ public class CarScratch {
 		showAll(getByCriterion(cars, Car.getRedCarCriterion()));
 		showAll(getByCriterion(cars, Car.getGasLevelCarCriterion(7)));
 		
-		cars.sort(Car.getGasComparator());
-		showAll(cars);
-		showAll(getByCriterion(cars, c -> c.getPassengers().size() == 2));
-		showAll(getByCriterion(cars, Car.getFourPassengerCriterion()));
-		
-		List<String> colors = Arrays.asList("желтый", "Красный","синий", "Фиолетовый", "Оранжевый");
-		showAll(getByCriterion(colors, st -> st.length() > 7));
-		showAll(getByCriterion(colors, st -> Character.isUpperCase(st.charAt(0))));
-		
-		LocalDate today = LocalDate.now();
-		List<LocalDate> dates = Arrays.asList(today, today.plusDays(1), today.plusDays(7), today.minusDays(2));
-		showAll(getByCriterion(dates, ld -> ld.isAfter(today)));
+		/*
+		 * cars.sort(Car.getGasComparator()); showAll(cars);
+		 * showAll(getByCriterion(cars, c -> c.getPassengers().size() == 2));
+		 * showAll(getByCriterion(cars, Car.getFourPassengerCriterion()));
+		 * 
+		 * List<String> colors = Arrays.asList("желтый", "Красный","синий",
+		 * "Фиолетовый", "Оранжевый"); showAll(getByCriterion(colors, st -> st.length()
+		 * > 7)); showAll(getByCriterion(colors, st ->
+		 * Character.isUpperCase(st.charAt(0))));
+		 * 
+		 * LocalDate today = LocalDate.now(); List<LocalDate> dates =
+		 * Arrays.asList(today, today.plusDays(1), today.plusDays(7),
+		 * today.minusDays(2)); showAll(getByCriterion(dates, ld -> ld.isAfter(today)));
+		 */
+		showAll(getByCriterion(cars, Car.getGasLevelCarCriterion(7)));
 		
 	}
 }

@@ -65,22 +65,9 @@ public class Car {
 	
 	
 	public static Criterion<Car> getGasLevelCarCriterion (int threshold) {
-		return new GasLevelCarCriterion (threshold);
+		return c-> c.gasLevel >= threshold;			
 	}
 	
-	private static class GasLevelCarCriterion implements Criterion<Car> {
-		int gasLevelThreshold;
-		
-		public GasLevelCarCriterion(int gasLevel) {
-			super();
-			this.gasLevelThreshold = gasLevel;
-		}
-
-		@Override
-		public boolean test(Car c) {
-			return c.gasLevel >= gasLevelThreshold;
-		}
-	}
 	
 	public static Comparator<Car> getGasComparator() {
 		return GAS_COMPARATOR;
