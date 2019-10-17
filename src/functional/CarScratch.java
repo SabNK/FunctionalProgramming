@@ -5,15 +5,15 @@ import java.util.Arrays;
 import java.util.List;
 
 public class CarScratch {
-	public static void showAll (List<Car> lc) {
-		for (Car c : lc) {
+	public static <E> void showAll (List<E> lc) {
+		for (E c : lc) {
 			System.out.println(c);
 		}
 		System.out.println("----------------------------------");
 	}
-	public static List<Car> getCarsByCriterion (Iterable<Car> in, CarCriterion crit) {
-		List<Car> output = new ArrayList<>();
-		for (Car c : in) {
+	public static <E> List<E> getByCriterion (Iterable<E> in, Criterion<E> crit) {
+		List<E> output = new ArrayList<>();
+		for (E c : in) {
 			if (crit.test(c))
 				output.add(c);
 		}
@@ -30,34 +30,17 @@ public class CarScratch {
 				);
 		
 		showAll(cars);
-		showAll(getCarsByCriterion(cars, Car.getRedCarCriterion()));
-		showAll(getCarsByCriterion(cars, Car.getGasLevelCarCriterion(7)));
+		showAll(getByCriterion(cars, Car.getRedCarCriterion()));
+		showAll(getByCriterion(cars, Car.getGasLevelCarCriterion(7)));
 		
 		cars.sort(Car.getGasComparator());
 		showAll(cars);
+		showAll(getByCriterion(cars, c -> c.getPassengers().size() == 2));
+		showAll(getByCriterion(cars, Car.getFourPassengerCriterion()));
 	}
 }
 
-interface CarCriterion {
-	boolean test (Car c);
-}
-class RedCarCriterion implements CarCriterion {
-	@Override
-	public boolean test(Car c) {
-		return c.getColor().equals("Red");
-	}
-}
-class GasLevelCarCriterion implements CarCriterion {
-	int gasLevelThreshold;
-	
-	public GasLevelCarCriterion(int gasLevel) {
-		super();
-		this.gasLevelThreshold = gasLevel;
-	}
-
-	@Override
-	public boolean test(Car c) {
-		return c.getGasLevel()>= gasLevelThreshold;
-	}
-	
+@FunctionalInterface
+interface Criterion <E> {
+	boolean test (E c);	
 }
