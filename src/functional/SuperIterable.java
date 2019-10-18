@@ -18,7 +18,7 @@ public class SuperIterable<E> implements Iterable<E> {
 	
 	public static void main(String[] args) {
 		SuperIterable<String> strings = new SuperIterable<>(Arrays.asList("LightCoral", "pink",
-				"orange", "gold", "plum", "Blue", "limegreen"));
+				"orange", "Gold", "plum", "Blue", "limegreen"));
 		for (String s: strings) {
 			System.out.println(s);
 		}
