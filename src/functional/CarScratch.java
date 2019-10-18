@@ -55,7 +55,7 @@ public class CarScratch {
 		showAll(getByCriterion(cars, Car.getColorCriterion("Red","Green","Orange")));
 		Criterion<Car> level7 = Car.getGasLevelCarCriterion(7);
 		Criterion<Car> blackAndOrange = Car.getColorCriterion("Black","Orange");
-		showAll(getByCriterion(cars, Criterion.and(level7, blackAndOrange)));
+		showAll(getByCriterion(cars, level7.and(blackAndOrange)));
 		
 	}
 }
