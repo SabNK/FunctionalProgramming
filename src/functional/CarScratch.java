@@ -3,12 +3,19 @@ package functional;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
+import java.util.function.ToIntFunction;
 
 public class CarScratch {
+	public static <E> ToIntFunction<E> compareWithThis (E target, Comparator<E> comp){
+		return x -> comp.compare(target, x);		
+	}
 	
-	
+	public static <E> Predicate<E> isBiggerThanThis (ToIntFunction<E> t) {
+		return x -> t.applyAsInt(x)<0;
+	}
 	
 	public static <E> void showAll (List<E> lc) {
 		for (E c : lc) {
@@ -58,6 +65,15 @@ public class CarScratch {
 		Predicate<Car> blackAndOrange = Car.getColorCriterion("Black","Orange");
 		showAll(getByCriterion(cars, level7.and(blackAndOrange)));
 		
+		Car bert = Car.withGasColorPassengers(5, "Blue");
+		
+		ToIntFunction <Car> compareWithBert = compareWithThis(bert, Car.getGasComparator());
+		Predicate<Car> compWithBert = isBiggerThanThis(compareWithBert);
+		for (Car c: cars) {
+			System.out.println("comparing " + c + " with bert gives " + compareWithBert.applyAsInt(c));
+			System.out.println("comparing " + compWithBert.test(c));
+		}
+		showAll(getByCriterion(cars, compWithBert));
 	}
 }
 
