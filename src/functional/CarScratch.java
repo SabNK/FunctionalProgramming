@@ -6,6 +6,17 @@ import java.util.Arrays;
 import java.util.List;
 
 public class CarScratch {
+	public static <E> Criterion <E> negate (Criterion<E> crit) {
+		return c -> !crit.test(c);
+	}
+	public static <E> Criterion <E> and (Criterion<E> crit1, Criterion<E> crit2) {
+		return c -> crit1.test(c)&&crit2.test(c);
+	}
+	public static <E> Criterion <E> or (Criterion<E> crit1, Criterion<E> crit2) {
+		return c -> crit1.test(c)||crit2.test(c);
+	}
+	
+	
 	public static <E> void showAll (List<E> lc) {
 		for (E c : lc) {
 			System.out.println(c);
@@ -50,6 +61,9 @@ public class CarScratch {
 		 */
 		showAll(getByCriterion(cars, Car.getGasLevelCarCriterion(7)));
 		showAll(getByCriterion(cars, Car.getColorCriterion("Red","Green","Orange")));
+		Criterion<Car> level7 = Car.getGasLevelCarCriterion(7);
+		Criterion<Car> blackAndOrange = Car.getColorCriterion("Black","Orange");
+		showAll(getByCriterion(cars, and(level7, blackAndOrange)));
 		
 	}
 }
