@@ -49,6 +49,7 @@ public class CarScratch {
 		 * today.minusDays(2)); showAll(getByCriterion(dates, ld -> ld.isAfter(today)));
 		 */
 		showAll(getByCriterion(cars, Car.getGasLevelCarCriterion(7)));
+		showAll(getByCriterion(cars, Car.getColorCriterion("Red","Green","Orange")));
 		
 	}
 }

@@ -68,6 +68,9 @@ public class Car {
 		return c-> c.gasLevel >= threshold;			
 	}
 	
+	public static Criterion<Car> getColorCriterion(String...colors) {
+		return c -> Arrays.asList(colors).contains(c.color);
+	}
 	
 	public static Comparator<Car> getGasComparator() {
 		return GAS_COMPARATOR;
