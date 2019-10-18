@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.function.Predicate;
 
 public class Car {
 	private final int gasLevel;
@@ -53,22 +54,22 @@ public class Car {
 				+ trunkContents: " no trunck") + "]";
 	}
 		
-	public static Criterion<Car> getFourPassengerCriterion () {
+	public static Predicate<Car> getFourPassengerCriterion () {
 		return c -> c.getPassengers().size() == 4;
 	}
 	
-	public static Criterion<Car> getRedCarCriterion() {
+	public static Predicate<Car> getRedCarCriterion() {
 		return RED_CAR_CRITERION;
 	}
 
-	public static final Criterion<Car> RED_CAR_CRITERION = c -> c.color.equals("Red");
+	public static final Predicate<Car> RED_CAR_CRITERION = c -> c.color.equals("Red");
 	
 	
-	public static Criterion<Car> getGasLevelCarCriterion (int threshold) {
+	public static Predicate<Car> getGasLevelCarCriterion (int threshold) {
 		return c-> c.gasLevel >= threshold;			
 	}
 	
-	public static Criterion<Car> getColorCriterion(String...colors) {
+	public static Predicate<Car> getColorCriterion(String...colors) {
 		return c -> Arrays.asList(colors).contains(c.color);
 	}
 	

@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Predicate;
 
 public class CarScratch {
 	
@@ -15,7 +16,7 @@ public class CarScratch {
 		}
 		System.out.println("----------------------------------");
 	}
-	public static <E> List<E> getByCriterion (Iterable<E> in, Criterion<E> crit) {
+	public static <E> List<E> getByCriterion (Iterable<E> in, Predicate<E> crit) {
 		List<E> output = new ArrayList<>();
 		for (E c : in) {
 			if (crit.test(c))
@@ -53,8 +54,8 @@ public class CarScratch {
 		 */
 		showAll(getByCriterion(cars, Car.getGasLevelCarCriterion(7)));
 		showAll(getByCriterion(cars, Car.getColorCriterion("Red","Green","Orange")));
-		Criterion<Car> level7 = Car.getGasLevelCarCriterion(7);
-		Criterion<Car> blackAndOrange = Car.getColorCriterion("Black","Orange");
+		Predicate<Car> level7 = Car.getGasLevelCarCriterion(7);
+		Predicate<Car> blackAndOrange = Car.getColorCriterion("Black","Orange");
 		showAll(getByCriterion(cars, level7.and(blackAndOrange)));
 		
 	}
