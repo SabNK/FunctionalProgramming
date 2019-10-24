@@ -79,4 +79,7 @@ public class Car {
 
 	private static final Comparator<Car> GAS_COMPARATOR = (arg0, arg1) -> arg0.gasLevel - arg1.gasLevel;
 	
+	public Car addGas(int g) {
+		return new Car(gasLevel + g, color, passengers, trunkContents);
+	}
 }
