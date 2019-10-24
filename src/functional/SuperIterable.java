@@ -12,7 +12,7 @@ import java.util.function.Predicate;
 public class SuperIterable<E> implements Iterable<E> {
 	private Iterable<E> self;
 
-	public SuperIterable(Iterable self) {
+	public SuperIterable(Iterable<E> self) {
 		this.self = self;
 	}
 
@@ -73,5 +73,12 @@ public class SuperIterable<E> implements Iterable<E> {
 			.filter(c -> c.getGasLevel() > 6)
 			.map(c -> c.getPassengers().get(0) + " is driving a " + c.getColor() + " car with lots of fuel")
 			.forEach(c -> System.out.println("> " + c));
+		System.out.println("----------------------------------");
+		carIter
+			.map(c -> Car.withGasColorPassengers(
+					c.getGasLevel() + 4, 
+					c.getColor(), 
+					c.getPassengers().toArray(new String[] {})))
+			.forEach(c -> System.out.println(">> " + c));
 	}	
 }
