@@ -16,6 +16,12 @@ public class SuperIterable<E> implements Iterable<E> {
 		this.self = self;
 	}
 
+	public <F> SuperIterable<F> flatMap (Function<E, SuperIterable<F>> op) {
+		List<F> results = new ArrayList<>();
+		self.forEach(e -> op.apply(e).forEach(d -> results.add(d)));
+		return new SuperIterable<>(results);
+		
+	}
 	public <F> SuperIterable<F> map (Function<E,F> op) {
 		List<F> results = new ArrayList<>();
 		self.forEach(e -> results.add(op.apply(e)));
@@ -80,5 +86,11 @@ public class SuperIterable<E> implements Iterable<E> {
 		System.out.println("----------------------------------");
 		carIter
 			.forEach(c -> System.out.println(">> " + c));
+		System.out.println("----------------------------------");
+		carIter
+			.filter(c -> c.getColor()== "Red")
+			.flatMap(c -> new SuperIterable<>(c.getPassengers()))
+			.map(d -> d.toUpperCase())
+			.forEach(d -> System.out.println(">> " + d));
 	}	
 }
