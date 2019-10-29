@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 public class Car {
@@ -48,6 +49,10 @@ public class Car {
 		return trunkContents;
 	}
 
+	public Optional<List<String>> getTrunkContentsOpt() {
+		return Optional.ofNullable(trunkContents);
+	}
+	
 	@Override
 	public String toString() {
 		return "Car [gasLevel=" + gasLevel + ", color=" + color + ", passengers=" + passengers + (trunkContents != null ?", trunkContents="
