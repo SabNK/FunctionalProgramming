@@ -30,7 +30,9 @@ public class CollectAverage {
 		long start = System.nanoTime();
 		Averager result = DoubleStream.generate(() -> ThreadLocalRandom.current().nextDouble(-Math.PI, Math.PI))
 			.parallel()
-			.limit(4_000_000_000L)
+			.unordered() // Stream generate is already unordered
+			.limit(200_000_000L)
+			.map(x -> Math.sin(x))
 			.collect(() -> new Averager(), (b, i) -> b.include(i), (b1,b2) -> b1.merge(b2));
 		long end = System.nanoTime();
 		System.out.println(result.get());
