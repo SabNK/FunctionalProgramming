@@ -12,7 +12,8 @@ import static java.util.stream.Collectors.groupingBy;
 import java.io.IOException;
 
 public class Concordance {
-	
+	private static final Comparator<Map.Entry<String,Long>> valueOrder = Map.Entry.comparingByValue();
+	private static final Comparator<Map.Entry<String,Long>> reversedValue = valueOrder.reversed();
 	public static void main(String[] args) throws IOException {
 		Files.lines(Paths.get("pg42671.txt"))
 			.flatMap(l -> Pattern.compile("\\W+").splitAsStream(l))
@@ -20,8 +21,8 @@ public class Concordance {
 			.map(w -> w.toLowerCase())
 			.collect(groupingBy(Function.identity(), Collectors.counting()))
 			.entrySet().stream()
-			.sorted(Map.Entry.<String, Long>comparingByValue().reversed())
+			.sorted(reversedValue)
 			.limit(30)
-			.forEach(e -> System.out.println("Word " + e.getKey() + " is used " + e.getValue()));
+			.forEach(e -> System.out.printf("%10s : %5d\n", e.getKey(), e.getValue()));
 	}
 }
