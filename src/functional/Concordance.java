@@ -12,17 +12,19 @@ import static java.util.stream.Collectors.groupingBy;
 import java.io.IOException;
 
 public class Concordance {
-	private static final Comparator<Map.Entry<String,Long>> valueOrder = Map.Entry.comparingByValue();
-	private static final Comparator<Map.Entry<String,Long>> reversedValue = valueOrder.reversed();
+	private static final Comparator<Map.Entry<String,Long>> VALUE_ORDER = Map.Entry.comparingByValue();
+	private static final Comparator<Map.Entry<String,Long>> REVERSED_VALUE = VALUE_ORDER.reversed();
+	private static final Pattern WORD_BREAK = Pattern.compile("\\W+");
 	public static void main(String[] args) throws IOException {
 		Files.lines(Paths.get("pg42671.txt"))
-			.flatMap(l -> Pattern.compile("\\W+").splitAsStream(l))
+			.flatMap(WORD_BREAK::splitAsStream)
 			.filter(w -> w.length()>0)
-			.map(w -> w.toLowerCase())
+			.map(String::toLowerCase)
 			.collect(groupingBy(Function.identity(), Collectors.counting()))
 			.entrySet().stream()
-			.sorted(reversedValue)
+			.sorted(REVERSED_VALUE)
 			.limit(30)
-			.forEach(e -> System.out.printf("%10s : %5d\n", e.getKey(), e.getValue()));
+			.map(e -> String.format("%10s : %5d", e.getKey(), e.getValue()))
+			.forEach(System.out::println);
 	}
 }
